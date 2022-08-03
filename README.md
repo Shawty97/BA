@@ -39,7 +39,7 @@ for review in tokenized_docs:
     tokenized_docs_no_punctuation.append(new_review)
 ```
 
-#### Removing Stop-words
+#### Removing Stopwords
 ```python
 from nltk.corpus import stopwords
 
