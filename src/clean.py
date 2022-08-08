@@ -23,6 +23,9 @@ for tweet in tweets:
     # lowercase
     tweet["text"] = tweet["text"].lower()
 
+    # remove URLs
+    tweet["text"] = re.sub(r'https?://\S+', '', tweet["text"])
+
     # word tokenize
     tweet["text"] = word_tokenize(tweet["text"])
 
