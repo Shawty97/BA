@@ -45,22 +45,28 @@ for tweet in tweets:
     try:
         tweet["text"] = sent_tokenize(tweet["text"])
     except TypeError as e:
-        # print(
-        #     "Sentence Tokenization failed for tweet {tweet_id} ({exception})".format(
-        #         tweet_id=tweet["tweet_id"],
-        #         exception=e,
-        #     )
-        # )
-        # TODO: what should we do here? stop for this tweet? continue with the remaining steps?
         pass
-    
-    # punctuation
-    tweet["text"] = [word for word in tweet["text"] if punctuation_re.sub("", word)]
 
-    # stopwords
-    tweet["text"] = [
-        word for word in tweet["text"] if word not in stopwords.words("english")
-    ]
+    # drop punctuation, stopwords and numbers
+    new_text = []
+    for word in tweet["text"]:
+        if punctuation_re.match(word):
+            continue
+
+        if word in stopwords.words("english"):
+            continue
+
+        is_number = False
+        try:
+            float(word)
+            is_number = True
+        except ValueError:
+            pass
+
+        if not is_number:
+            new_text.append(word)
+
+    tweet["text"] = new_text
 
 # write cleaned data
 with open(cleaned_data_target, mode="w", encoding="utf-8") as file_out:
