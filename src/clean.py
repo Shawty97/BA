@@ -56,14 +56,9 @@ for tweet in tweets:
         if word in stopwords.words("english"):
             continue
 
-        is_number = False
         try:
             float(word)
-            is_number = True
         except ValueError:
-            pass
-
-        if not is_number:
             new_text.append(word)
 
     tweet["text"] = new_text
