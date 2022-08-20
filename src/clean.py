@@ -4,13 +4,9 @@ import re
 import string
 from pathlib import Path
 
+import click
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
-
-# paths
-curent_directory = Path(__file__).parent
-data_source = curent_directory / "data" / "tweets.json"
-cleaned_data_target = curent_directory / "data" / "tweets_cleaned.json"
 
 # regex
 punctuation_re = re.compile(rf"[{re.escape(string.punctuation)}]")
@@ -19,50 +15,59 @@ twitter_at_re = re.compile(r"[@][\w_]+")
 twitter_hashtag_re = re.compile(r"[#][\w]+")
 special_characters_re = re.compile(r"[^\w\d\s\-]+")
 
-# load data
-with open(data_source, encoding="utf-8") as file_in:
-    tweets = json.load(file_in)["tweets"]
+def _clean_tweets(tweets: list[dict]):
+    for tweet in tweets:
+        # lowercase
+        tweet["text"] = tweet["text"].lower()
 
-for tweet in tweets:
-    # lowercase
-    tweet["text"] = tweet["text"].lower()
+        # remove URLs
+        tweet["text"] = re.sub(url_re, "", tweet["text"])
 
-    # remove URLs
-    tweet["text"] = re.sub(url_re, "", tweet["text"])
+        # remove ATs and hashtags
+        # TODO: clear possessive S: e.g. @WeDidItNYC's
+        tweet["text"] = re.sub(twitter_at_re, "", tweet["text"])
+        tweet["text"] = re.sub(twitter_hashtag_re, "", tweet["text"])
 
-    # remove ATs and hashtags
-    # TODO: clear possessive S: e.g. @WeDidItNYC's
-    tweet["text"] = re.sub(twitter_at_re, "", tweet["text"])
-    tweet["text"] = re.sub(twitter_hashtag_re, "", tweet["text"])
+        # clear special characters
+        tweet["text"] = re.sub(special_characters_re, " ", tweet["text"])
 
-    # clear special characters
-    tweet["text"] = re.sub(special_characters_re, " ", tweet["text"])
+        # word tokenize
+        tweet["text"] = word_tokenize(tweet["text"])
 
-    # word tokenize
-    tweet["text"] = word_tokenize(tweet["text"])
-
-    # sentence tokenize
-    try:
-        tweet["text"] = sent_tokenize(tweet["text"])
-    except TypeError as e:
-        pass
-
-    # drop punctuation, stopwords and numbers
-    new_text = []
-    for word in tweet["text"]:
-        if punctuation_re.match(word):
-            continue
-
-        if word in stopwords.words("english"):
-            continue
-
+        # sentence tokenize
         try:
-            float(word)
-        except ValueError:
-            new_text.append(word)
+            tweet["text"] = sent_tokenize(tweet["text"])
+        except TypeError as e:
+            pass
 
-    tweet["text"] = new_text
+        # drop punctuation, stopwords and numbers
+        new_text = []
+        for word in tweet["text"]:
+            if punctuation_re.match(word):
+                continue
 
-# write cleaned data
-with open(cleaned_data_target, mode="w", encoding="utf-8") as file_out:
-    json.dump(tweets, fp=file_out, indent=2)
+            if word in stopwords.words("english"):
+                continue
+
+            try:
+                float(word)
+            except ValueError:
+                new_text.append(word)
+
+        tweet["text"] = new_text
+
+
+def clean_json(file_path: Path, make_copy=True):
+    # load data
+    with open(file_path, encoding="utf-8") as file_in:
+        tweets = json.load(file_in)["tweets"]
+
+    # clean
+    _clean_tweets(tweets)
+
+    # write cleaned data
+    if make_copy:
+        file_path = file_path.parent / file_path.stem + '_cleaned.json'
+    
+    with open(file_path, mode="w", encoding="utf-8") as file_out:
+        json.dump(tweets, fp=file_out, indent=2)
