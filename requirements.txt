@@ -1,0 +1,7 @@
+fire
+nltk
+textblob
+vaderSentiment
+wheel
+tqdm
+# flair  # doesn't work because of legacy-install-failure for sentencepiece

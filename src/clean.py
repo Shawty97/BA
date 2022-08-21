@@ -4,7 +4,7 @@ import re
 import string
 from pathlib import Path
 
-import click
+from tqdm import tqdm
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 
@@ -16,7 +16,7 @@ twitter_hashtag_re = re.compile(r"[#][\w]+")
 special_characters_re = re.compile(r"[^\w\d\s\-]+")
 
 def _clean_tweets(tweets: list[dict]):
-    for tweet in tweets:
+    for tweet in tqdm(tweets):
         # lowercase
         tweet["text"] = tweet["text"].lower()
 
@@ -57,7 +57,7 @@ def _clean_tweets(tweets: list[dict]):
         tweet["text"] = new_text
 
 
-def clean_json(file_path: Path, make_copy=True):
+def clean_json(file_path: Path):
     # load data
     with open(file_path, encoding="utf-8") as file_in:
         tweets = json.load(file_in)["tweets"]
@@ -66,8 +66,5 @@ def clean_json(file_path: Path, make_copy=True):
     _clean_tweets(tweets)
 
     # write cleaned data
-    if make_copy:
-        file_path = file_path.parent / file_path.stem + '_cleaned.json'
-    
     with open(file_path, mode="w", encoding="utf-8") as file_out:
         json.dump(tweets, fp=file_out, indent=2)
