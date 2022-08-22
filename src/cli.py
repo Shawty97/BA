@@ -2,7 +2,7 @@ from pathlib import Path
 from fire import Fire
 
 from clean import clean_json
-from sentiment import sent_json
+from sentiment import sentiment_json
 
 
 class CLI:
@@ -16,8 +16,9 @@ class CLI:
     def sent(self, file_path: Path, method: str = "all"):
         """
         Analyze the sentiment of the tweets.
-        (Default run ALL methods sequentually)"""
-        sent_json(file_path=file_path, method_id=method)
+        (Runs ALL methods sequentually if no method is specified)
+        """
+        sentiment_json(file_path=file_path, method_id=method)
 
     def all(self, file_path: Path):
         """
