@@ -9,37 +9,27 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 DECIMAL_PLACES = 3
 
-sia = TextClassifier.load('en-sentiment')
+sia = TextClassifier.load("en-sentiment")
 sid = SentimentIntensityAnalyzer()
 
 
 class SentimentAnalyzer:
-
     @staticmethod
-    def flair(text: str or list):
+    def flair(text: str):
         """returns a float between 0 and 1"""
-        if isinstance(text, list):
-            text = " ".join(text)
-
         sentence = Sentence(text)
         sia.predict(sentence)
         return sentence.labels[0]._score
 
     @staticmethod
-    def textblob(text: str or list) -> float:
+    def textblob(text: str) -> float:
         """returns a float between -1 and 1"""
-        if isinstance(text, list):
-            text = " ".join(text)
-
         return TextBlob(text).sentiment.polarity
 
     @staticmethod
-    def vader(text: str or list) -> float:
+    def vader(text: str) -> float:
         """returns a float between -1 and 1"""
-        if isinstance(text, list):
-            text = " ".join(text)
-
-        return sid.polarity_scores(text)['compound']
+        return sid.polarity_scores(text)["compound"]
 
 
 def sentiment_json(file_path: Path, method_id: str = "all"):
@@ -61,9 +51,11 @@ def sentiment_json(file_path: Path, method_id: str = "all"):
         for tweet in tweets:
             tweet["sentiment_scores"] = {}
 
+            sentence = " ".join(tweet["text"])
+
             for method in methods:
-                tweet["sentiment_scores"][method.__name__] = '{:.2f}'.format(method(tweet["text"]))
-            
+                tweet["sentiment_scores"][method.__name__] = "{:.2f}".format(method(sentence))
+
             print(tweet["tweet_id"], tuple(tweet["sentiment_scores"].values()))
 
     # write analyzed data
