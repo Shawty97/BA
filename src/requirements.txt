@@ -1,0 +1,9 @@
+fire
+sentiment
+nltk
+pandas
+matplotlib
+numpy
+sklearn
+flair
+pandas

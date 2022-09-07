@@ -34,11 +34,11 @@ def _clean_tweets(tweets: list[dict]):
         # word tokenize
         tweet["text"] = word_tokenize(tweet["text"])
 
-        # sentence tokenize
-        try:
-            tweet["text"] = sent_tokenize(tweet["text"])
-        except TypeError as e:
-            pass
+        # # sentence tokenize
+        # try:
+        #     tweet["text"] = sent_tokenize(tweet["text"])
+        # except TypeError as e:
+        #     pass
 
         # drop punctuation, stopwords and numbers
         new_text = []
@@ -54,13 +54,13 @@ def _clean_tweets(tweets: list[dict]):
             except ValueError:
                 new_text.append(word)
 
-        tweet["text"] = new_text
+        tweet["text"] = ' '.join(new_text)
 
 
 def clean_json(file_path: Path):
     # load data
     with open(file_path, encoding="utf-8") as file_in:
-        tweets = json.load(file_in)["tweets"]
+        tweets = json.load(file_in)
 
     # clean
     _clean_tweets(tweets)
