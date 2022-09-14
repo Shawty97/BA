@@ -1,0 +1,38 @@
+tweet_id,user_id,text,created_at,conversation_id,in_reply_to_user_id,lang,possibly_sensitive,data.public_metrics.retweet_count,data.public_metrics.quote_count,data.public_metrics.like_count,data.public_metrics.reply_count,reply_settings,year,month,day,source,sentiment_scores/flair,sentiment_scores/textblob,sentiment_scores/vader
+913599329369280513,418101032,rt congratulations runners-up pneumaglide,2017-09-29,913599329369280513,,en,false,3,0,0,0,everyone,2017,9,29,Twitter for iPhone,1.00,0.00,0.72
+913599235077083136,418101032,rt client wins 5k,2017-09-29,913599235077083136,,en,false,4,0,0,0,everyone,2017,9,29,Twitter for iPhone,0.97,0.00,0.46
+913599211425419265,418101032,rt congratulations winning top prize rising star full story zan,2017-09-29,913599211425419265,,en,false,7,0,0,0,everyone,2017,9,29,Twitter for iPhone,1.00,0.00,0.84
+913598979790770176,418101032,rt pretty emotional moment tonight one winners announced great capture htt,2017-09-29,913598979790770176,,en,false,7,0,0,0,everyone,2017,9,29,Twitter for iPhone,1.00,0.00,0.46
+910313184380235782,418101032,rt savvy fundraisers increase donor impact matching major gifts thx,2017-09-20,910313184380235782,,en,false,1,0,0,0,everyone,2017,9,20,Twitter for iPhone,1.00,0.00,0.00
+895681187557117956,418101032,rt updates winners https,2017-08-10,895681187557117956,,en,false,2,0,0,0,everyone,2017,8,10,Twitter for iPhone,0.97,0.00,0.00
+894756868752592896,418101032,rt hoping follows grad lead take finalist prize,2017-08-08,894756868752592896,,en,false,1,0,0,0,everyone,2017,8,8,Twitter for iPhone,0.99,0.00,0.90
+892538708142043136,418101032,rt join us amp ny social enterprise summer connector w ht,2017-08-02,892538708142043136,,en,false,1,0,0,0,everyone,2017,8,2,Twitter for iPhone,1.00,0.00,0.46
+892538646582218752,418101032,rt podcast su sanni inspired start business focused helping nonprofits,2017-08-02,892538646582218752,,en,false,2,0,0,0,everyone,2017,8,2,Twitter for iPhone,0.99,0.00,0.46
+884366691668566016,418101032,brilliant examples engaging nonprofit web content,2017-07-10,884366691668566016,,en,false,0,0,0,0,everyone,2017,7,10,Tweet Jukebox,1.00,0.00,0.84
+884117552259051520,418101032,crowdfunding new methods changing,2017-07-09,884117552259051520,,en,false,1,0,2,0,everyone,2017,7,9,Tweet Jukebox,0.99,0.00,0.00
+884042044099919874,418101032,membership-based nonprofits killing social media,2017-07-09,884042044099919874,,en,false,0,0,0,0,everyone,2017,7,9,Tweet Jukebox,1.00,0.00,0.84
+883755153165357056,418101032,free download major gift pipeline template,2017-07-08,883755153165357056,,en,false,0,0,0,0,everyone,2017,7,8,Tweet Jukebox,0.99,0.00,0.84
+883679643836063745,418101032,way think charity dead wrong,2017-07-08,883679643836063745,,en,false,0,0,0,0,everyone,2017,7,8,Tweet Jukebox,0.99,0.00,0.00
+883460786995159041,418101032,experts engaging young donors,2017-07-07,883460786995159041,,en,false,0,0,0,0,everyone,2017,7,7,Tweet Jukebox,0.99,0.00,0.00
+883415455326752769,418101032,donor email fails costing donations,2017-07-07,883415455326752769,,en,false,0,0,0,0,everyone,2017,7,7,Tweet Jukebox,0.99,0.00,0.72
+883370155270709249,418101032,demand webinar top nonprofits drive traffic websites,2017-07-07,883370155270709249,,en,false,0,0,0,0,everyone,2017,7,7,Tweet Jukebox,0.99,0.00,0.00
+883325202045841408,418101032,tell nonprofit website mobile-responsive,2017-07-07,883325202045841408,,en,false,0,0,0,0,everyone,2017,7,7,Tweet Jukebox,0.99,0.00,0.84
+883279522690469888,418101032,top charitable baseball teams,2017-07-07,883279522690469888,,en,false,0,1,0,0,everyone,2017,7,7,Tweet Jukebox,0.99,0.00,0.84
+883098355731243009,418101032,new features facebook twitter apple means nonprofits,2017-07-06,883098355731243009,,en,false,0,0,0,0,everyone,2017,7,6,Tweet Jukebox,1.00,0.00,0.46
+883053064042708992,418101032,lgbt nonprofits know,2017-07-06,883053064042708992,,en,false,0,0,0,0,everyone,2017,7,6,Tweet Jukebox,0.95,0.00,0.46
+883007758391496704,418101032,state nonprofits per person,2017-07-06,883007758391496704,,en,false,0,0,1,0,everyone,2017,7,6,Tweet Jukebox,0.96,0.00,0.00
+882962859759738881,418101032,could nonprofits use meerkat periscope,2017-07-06,882962859759738881,,en,false,0,0,0,0,everyone,2017,7,6,Tweet Jukebox,0.99,0.00,0.46
+882917142743719940,418101032,analyzed data nonprofit zoos aquariums found,2017-07-06,882917142743719940,,en,false,0,0,1,0,everyone,2017,7,6,Tweet Jukebox,0.99,0.00,0.46
+882735962882805760,418101032,demand webinar deadly sins sponsorship,2017-07-05,882735962882805760,,en,false,0,0,1,0,everyone,2017,7,5,Tweet Jukebox,0.99,0.00,0.46
+657613202167959552,439187155,rt b2c companies https,2015-10-23,657613202167959552,,en,false,1,0,0,0,everyone,2015,10,23,Twitter for iPhone,0.96,0.00,0.00
+882690727318364160,418101032,ask experts handle first time major gift meetings,2017-07-05,882690727318364160,,en,false,0,0,0,0,everyone,2017,7,5,Tweet Jukebox,0.99,0.00,0.46
+882645382613872641,418101032,want people know visited linkedin profile adjust settings,2017-07-05,882645382613872641,,en,false,0,0,0,0,everyone,2017,7,5,Tweet Jukebox,0.99,0.00,0.84
+882600480458911744,418101032,use facebook donate button effectively,2017-07-05,882600480458911744,,en,false,0,0,0,0,everyone,2017,7,5,Tweet Jukebox,0.99,0.00,0.46
+882554756568363013,418101032,co-founder ceo su sanni sits discuss experience black entrepreneur,2017-07-05,882554756568363013,,en,false,0,0,0,0,everyone,2017,7,5,Tweet Jukebox,1.00,0.00,0.46
+882373623671128064,418101032,stupid simple trick getting donations online,2017-07-04,882373623671128064,,en,false,0,0,0,0,everyone,2017,7,4,Tweet Jukebox,0.96,0.00,0.72
+882328330904711168,418101032,recruit p2p fundraisers best em,2017-07-04,882328330904711168,,en,false,0,0,0,0,everyone,2017,7,4,Tweet Jukebox,0.99,0.00,0.00
+882282966680043521,418101032,grow nonprofit audience using creative pledges,2017-07-04,882282966680043521,,en,false,0,0,2,0,everyone,2017,7,4,Tweet Jukebox,1.00,0.00,0.46
+882238089019699200,418101032,planning online campaign crowdfunding checklist help cover bases,2017-07-04,882238089019699200,,en,false,0,0,0,0,everyone,2017,7,4,Tweet Jukebox,1.00,0.00,0.90
+882192379847094272,418101032,free visual storytelling tools nonprofits slideshare,2017-07-04,882192379847094272,,en,false,0,0,0,0,everyone,2017,7,4,Tweet Jukebox,1.00,0.00,0.93
+882011228461289473,418101032,hiring online fundraiser look resume skills,2017-07-03,882011228461289473,,en,false,0,0,0,0,everyone,2017,7,3,Tweet Jukebox,0.99,0.00,0.90
+881965920960348160,418101032,givers give,2017-07-03,881965920960348160,,en,false,0,0,0,0,everyone,2017,7,3,Tweet Jukebox,0.77,0.00,0.00
