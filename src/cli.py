@@ -1,38 +1,29 @@
 from pathlib import Path
 from fire import Fire
 
-from clean import clean_json
-from sentiment import sentiment_json
-from bow import bow_json
+
+
+_data_dir = Path(__file__).parent / 'data'
 
 
 class CLI:
-    def all(self, file_path: Path):
-        """
-        Clean and analyze the sentiment of the tweets, then apply BoW.
-        """
-        self.clean(file_path=file_path)
-        self.sent(file_path=file_path, method="all")
-        self.bow(file_path=file_path)
+    @staticmethod
+    def clean():
+        from clean import clean_csv
+        clean_csv(
+            file_path=_data_dir / 'tweets.csv',
+            out_path=_data_dir / 'tweets_cleaned.csv',
+        )
 
-    def clean(self, file_path: Path):
-        """
-        Clean the tweets
-        (Warning: Make a backup of the file if you want to keep it)
-        """
-        clean_json(file_path=file_path)
+    @staticmethod
+    def sent(file_path: Path):
+        from sentiment import sentiment_json
+        file_path = _data_dir / 'tweets_cleaned.csv'
+        sentiment_json(file_path=file_path)
 
-    def sent(self, file_path: Path, method: str = "all"):
-        """
-        Analyze the sentiment of the tweets.
-        (Runs ALL methods sequentually if no method is specified)
-        """
-        sentiment_json(file_path=file_path, method_id=method)
-
-    def bow(self, file_path: Path):
-        """
-        Apply "Bag of Words" to tweets
-        """
+    @staticmethod
+    def bow(file_path: Path):
+        from bow import bow_json
         bow_json(file_path=file_path)
 
 

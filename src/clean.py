@@ -1,8 +1,9 @@
 # imports
-import json
+import csv
 import re
 import string
 from pathlib import Path
+from time import sleep
 
 from tqdm import tqdm
 from nltk.tokenize import word_tokenize, sent_tokenize
@@ -15,56 +16,60 @@ twitter_at_re = re.compile(r"[@][\w_]+")
 twitter_hashtag_re = re.compile(r"[#][\w]+")
 special_characters_re = re.compile(r"[^\w\d\s\-]+")
 
-def _clean_tweets(tweets: list[dict]):
-    for tweet in tqdm(tweets):
-        # lowercase
-        tweet["text"] = tweet["text"].lower()
 
-        # remove URLs
-        tweet["text"] = re.sub(url_re, "", tweet["text"])
+def _clean_text(text: str) -> str:
+    # lowercase
+    text = text.lower()
 
-        # remove ATs and hashtags
-        # TODO: clear possessive S: e.g. @WeDidItNYC's
-        tweet["text"] = re.sub(twitter_at_re, "", tweet["text"])
-        tweet["text"] = re.sub(twitter_hashtag_re, "", tweet["text"])
+    # remove URLs
+    text = re.sub(url_re, "", text)
 
-        # clear special characters
-        tweet["text"] = re.sub(special_characters_re, " ", tweet["text"])
+    # remove ATs and hashtags
+    # TODO: clear possessive S: e.g. @WeDidItNYC's
+    text = re.sub(twitter_at_re, "", text)
+    text = re.sub(twitter_hashtag_re, "", text)
 
-        # word tokenize
-        tweet["text"] = word_tokenize(tweet["text"])
+    # clear special characters
+    text = re.sub(special_characters_re, " ", text)
 
-        # # sentence tokenize
-        # try:
-        #     tweet["text"] = sent_tokenize(tweet["text"])
-        # except TypeError as e:
-        #     pass
+    # # sentence tokenize
+    # text = sent_tokenize(text)
 
-        # drop punctuation, stopwords and numbers
-        new_text = []
-        for word in tweet["text"]:
-            if punctuation_re.match(word):
-                continue
+    # word tokenize
+    text = word_tokenize(text)
 
-            if word in stopwords.words("english"):
-                continue
+    # drop punctuation, stopwords and numbers
+    new_text = []
+    for word in text:
+        if punctuation_re.match(word):
+            continue
 
-            try:
-                float(word)
-            except ValueError:
-                new_text.append(word)
+        if word in stopwords.words("english") or word in stopwords.words("german"):
+            continue
 
-        tweet["text"] = ' '.join(new_text)
+        try:
+            float(word)
+        except ValueError:
+            new_text.append(word)
+
+    return " ".join(new_text)
 
 
-def clean_json(file_path: Path):
+def _clean_csv(reader: csv.DictReader):
+    for row in tqdm(reader):
+        row[2] = _clean_text(row[2])
+        yield row
+
+
+def clean_csv(file_path: Path, out_path: Path):
     # load data
     with open(file_path, encoding="utf-8") as file_in:
-        tweets = json.load(file_in)
+        reader = csv.reader(file_in, delimiter=",")
+        header = next(reader)
 
-    # clean
-    _clean_tweets(tweets)
-
-    # write cleaned data
-    with open(file_path, mode="w", encoding="utf-8") as file_out:
-        json.dump(tweets, fp=file_out, indent=2)
+        # write cleaned data
+        with open(out_path, mode="w", encoding="utf-8") as file_out:
+            writer = csv.writer(file_out, delimiter=",")
+            writer.writerow(header)
+            for cleaned_row in _clean_csv(reader):
+                writer.writerow(cleaned_row)
