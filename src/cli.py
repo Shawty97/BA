@@ -1,5 +1,6 @@
 from pathlib import Path
 from fire import Fire
+from tabulate import tabulate
 
 
 _data_dir = Path(__file__).parent / "data"
@@ -14,6 +15,10 @@ class CLI:
     def clean():
         """
         TODO: explain what I'm doing
+
+        - alle satzzeichen wegschmeissen
+        - bla
+        - blub
         """
         from clean import clean_csv
 
@@ -25,7 +30,7 @@ class CLI:
     @staticmethod
     def sent():
         """
-        TODO: explain what I'm doing
+        file1 -> sent methoden bla bla -> file2
         """
         from sent import sentiment_csv
 
@@ -37,11 +42,12 @@ class CLI:
     @staticmethod
     def bow():
         """
-        TODO: explain what I'm doing
+        get accuracy score for tweets_analyzed.csv
         """
-        from bow import bow_json
+        from bow import bow_csv
 
-        bow_json(file_path=_data_dir / "tweets_analyzed.csv")
+        summary = bow_csv(file_path=_data_dir / "tweets_analyzed.csv")
+        print(tabulate(list(summary.items()), headers=['Stat', 'Value']))
 
 
 if __name__ == "__main__":

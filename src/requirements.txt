@@ -1,9 +1,10 @@
 fire
-sentiment
-nltk
-pandas
-matplotlib
-numpy
-sklearn
 flair
+matplotlib
+nltk
+numpy
 pandas
+pandas
+sentiment
+sklearn
+tabulate

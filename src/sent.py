@@ -39,14 +39,15 @@ def sentiment_csv(file_path: Path, out_path: Path):
         header = next(reader)
 
         # write cleaned data
-        with open(out_path, mode="w", encoding="utf-8") as file_out:
+        with open(out_path, mode="w", encoding="utf-8", newline='') as file_out:
             writer = csv.writer(file_out, delimiter=",")
             writer.writerow(header + ['sent_flair', 'sent_textblob', 'sent_vader'])
+            sa = SentimentAnalyzer
+            
             for row in reader:
                 if not row:
                     continue
 
-                sa = SentimentAnalyzer
                 writer.writerow(
                     row + [sa.flair(row[2]), sa.textblob(row[2]), sa.vader(row[2])]
                 )

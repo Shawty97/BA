@@ -77,7 +77,7 @@ def clean_csv(file_path: Path, out_path: Path):
         header = next(reader)
 
         # write cleaned data
-        with open(out_path, mode="w", encoding="utf-8") as file_out:
+        with open(out_path, mode="w", encoding="utf-8", newline='') as file_out:
             writer = csv.writer(file_out, delimiter=",")
             writer.writerow(header)
             for cleaned_row in _clean_csv(reader):
