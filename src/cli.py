@@ -19,7 +19,7 @@ class CLI:
                 node.unlink()
         print('Running all 3 steps consecutively: clean → sent → bow')
         for i, method in enumerate([self.clean, self.sent, self.bow]):
-            print(f'\nStep {i}: \t{method.__name__}')
+            print(f'\nStep {i+1}: \t{method.__name__}')
             method()
         print('done')
 
