@@ -79,12 +79,9 @@ def bow_csv(file_path: Path) -> dict[str, float]:
     )
 
     # vectorize training data
-    vectorizer = CountVectorizer()
+    vectorizer = CountVectorizer(ngram_range=(1,2), min_df=2)
     x_train = vectorizer.fit_transform(x_train)
     x_test = vectorizer.transform(x_test)
-
-    # TODO: find out what we wanna use this for
-    feature_names = vectorizer.get_feature_names()
 
     # regression
     scores = cross_val_score(LogisticRegression(), x_train, y_train, cv=5)
