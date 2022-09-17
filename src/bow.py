@@ -35,7 +35,7 @@ def bow_csv(file_path: Path) -> dict[str, float]:
     )
 
     # vectorize training data
-    vectorizer = CountVectorizer(ngram_range=(1,2), min_df=2)
+    vectorizer = CountVectorizer(ngram_range=(1, 2), min_df=2)
     x_train = vectorizer.fit_transform(x_train)
     x_test = vectorizer.transform(x_test)
 
@@ -48,7 +48,7 @@ def bow_csv(file_path: Path) -> dict[str, float]:
 
     # Confusion matrix
     confusion = metrics.confusion_matrix(y_test, logreg.predict(x_test))
-    
+
     # Training set score: RandomForestClassifier
     rfc = RandomForestClassifier()
     rfc.fit(x_train, y_train)
@@ -59,7 +59,7 @@ def bow_csv(file_path: Path) -> dict[str, float]:
     grid.fit(x_train, y_train)
 
     # Support vector machine
-    rbf = svm.SVC(kernel='rbf', gamma=0.5, C=0.1).fit(x_train, y_train)
+    rbf = svm.SVC(kernel="rbf", gamma=0.5, C=0.1).fit(x_train, y_train)
     rbf_pred = rbf.predict(x_test)
     rbf_accuracy = metrics.accuracy_score(y_true=y_test, y_pred=rbf_pred)
 
