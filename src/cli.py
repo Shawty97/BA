@@ -1,3 +1,4 @@
+import enum
 from pathlib import Path
 from fire import Fire
 from tabulate import tabulate
@@ -10,6 +11,17 @@ class CLI:
     """
     Command Line Interface for Robert's Bachelor Thesis
     """
+
+    def all(self):
+        print('Cleaning data directory (only leaving tweets.csv)')
+        for node in _data_dir.iterdir():
+            if node.is_file() and node.name != 'tweets.csv':
+                node.unlink()
+        print('Running all 3 steps consecutively: clean → sent → bow')
+        for i, method in enumerate([self.clean, self.sent, self.bow]):
+            print(f'\nStep {i}: \t{method.__name__}')
+            method()
+        print('done')
 
     @staticmethod
     def clean():
