@@ -45,13 +45,12 @@ def bow_csv(file_path: Path) -> dict[str, float]:
     # Training set score: LogisticRegression
     logreg = LogisticRegression()
     logreg.fit(x_train, y_train)
-
-    # Confusion matrix
-    confusion = metrics.confusion_matrix(y_test, logreg.predict(x_test))
+    lr_confusion = metrics.confusion_matrix(y_test, logreg.predict(x_test))
 
     # Training set score: RandomForestClassifier
     rfc = RandomForestClassifier()
     rfc.fit(x_train, y_train)
+    rf_confusion = metrics.confusion_matrix(y_test, rfc.predict(x_test))
 
     # Best cross-validation score; Best parameters
     param_grid = {"C": [0.001, 0.01, 0.1, 1, 10]}
@@ -67,9 +66,10 @@ def bow_csv(file_path: Path) -> dict[str, float]:
         lr_mean_cross=numpy.mean(scores),
         lr_trainin_set_score=logreg.score(x_train, y_train),
         lr_test_set_score=logreg.score(x_test, y_test),
+        lr_confusion_matrix=str(lr_confusion).replace("\n", ","),
         rf_trainin_set_score=rfc.score(x_train, y_train),
         rf_test_set_score=rfc.score(x_test, y_test),
-        confusion_matrix=str(confusion).replace("\n", ","),
+        rf_confusion_matrix=str(rf_confusion).replace("\n", ","),
         gs_best_cross_validation_score=grid.best_score_,
         gs_best_params=grid.best_params_,
         rbf_accuracy=rbf_accuracy,
