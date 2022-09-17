@@ -3,7 +3,6 @@ import csv
 import re
 import string
 from pathlib import Path
-from time import sleep
 
 from tqdm import tqdm
 from nltk.tokenize import word_tokenize, sent_tokenize
@@ -15,6 +14,16 @@ url_re = re.compile(r"https?://\S+")
 twitter_at_re = re.compile(r"[@][\w_]+")
 twitter_hashtag_re = re.compile(r"[#][\w]+")
 special_characters_re = re.compile(r"[^\w\d\s\-]+")
+
+UNWANTED_CSV_ROWS = {
+    "source",
+    "created_at",
+    "description",
+    "profile_image_url",
+    "verified",
+    "protected",
+    "location",
+}
 
 
 def _clean_text(text: str) -> str:
