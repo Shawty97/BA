@@ -6,6 +6,10 @@ _data_dir = Path(__file__).parent / "data"
 
 
 class CLI:
+    """
+    Command Line Interface for Robert's Bachelor Thesis
+    """
+
     @staticmethod
     def clean():
         """
@@ -31,7 +35,7 @@ class CLI:
         )
 
     @staticmethod
-    def bow(file_path: Path):
+    def bow():
         """
         TODO: explain what I'm doing
         """
