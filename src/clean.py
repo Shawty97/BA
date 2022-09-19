@@ -81,4 +81,7 @@ def clean_csv(file_path: Path, out_path: Path):
             writer = csv.writer(file_out, delimiter=",")
             writer.writerow(header)
             for cleaned_row in _clean_csv(reader):
+                if not cleaned_row[2]:
+                    continue
+                
                 writer.writerow(cleaned_row)
