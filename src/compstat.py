@@ -36,11 +36,9 @@ def merge_company_status_files(
                 # reply count
                 new_company_info_vectors[company_name][0].append(row[12])
 
-    for company in new_company_info_vectors:
+    for company in new_company_info_vectors.values():
         for i in range(len(company)):
-            new_company_info_vectors[company][i] = json.dumps(
-                new_company_info_vectors[company][i]
-            ).replace(",", " ")
+            company[i] = json.dumps(company[i]).replace(",", " ")
 
     # load company data
     with open(file_companies, encoding="utf-8") as file_in:
