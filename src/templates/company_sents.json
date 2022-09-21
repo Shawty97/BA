@@ -1,0 +1,8 @@
+{
+  "tweets_analyzed": {
+    "sent_vader_vector": ["sent_vader", -1],
+    "retweet_counts": ["data.public_metrics.retweet_count", -1],
+    "like_counts": ["data.public_metrics.like_count", -1],
+    "reply_counts": ["data.public_metrics.reply_count", -1]
+  }
+}

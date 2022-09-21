@@ -60,6 +60,18 @@ class CLI:
 
         summary = bow_csv(file_path=_data_dir / "tweets_analyzed.csv")
         print(tabulate(list(summary.items()), headers=['Stat', 'Value']))
+    
+    @staticmethod
+    def compstat():
+        """DOCUMENT ME PLS"""
+        
+        from compstat import merge_company_status_files
+
+        merge_company_status_files(
+            file_companies=_data_dir / 'funded_companies.csv',
+            file_analyzed=_data_dir / 'tweets_analyzed.csv',
+            out_path=_data_dir / 'companies_status.csv',
+        )
 
 
 if __name__ == "__main__":
