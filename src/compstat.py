@@ -28,13 +28,13 @@ def merge_company_status_files(
                 new_company_info_vectors[company_name][0].append(row[-1])
 
                 # retweet count
-                new_company_info_vectors[company_name][0].append(row[9])
+                new_company_info_vectors[company_name][0].append(row[8])
 
                 # like count
-                new_company_info_vectors[company_name][0].append(row[11])
+                new_company_info_vectors[company_name][0].append(row[10])
 
                 # reply count
-                new_company_info_vectors[company_name][0].append(row[12])
+                new_company_info_vectors[company_name][0].append(row[11])
 
     for company in new_company_info_vectors.values():
         for i in range(len(company)):
@@ -54,4 +54,4 @@ def merge_company_status_files(
             )
 
             for row in reader:
-                writer.writerow(row + new_company_info_vectors.get(row[2]))
+                writer.writerow(row + [new_company_info_vectors.get(row[2])])
