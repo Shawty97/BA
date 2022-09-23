@@ -45,19 +45,19 @@ def merge_company_status_files(
     # calculate sums
     for company in new_company_info_vectors.values():
         # positive tweets
-        company[4] = len([x for x in company[0] if x >= NEUTRAL_UPPER_BOUND])
+        company[4] = len([x for x in company[0] if x > NEUTRAL_UPPER_BOUND])
 
         # neutral tweets
         company[6] = len(
             [
                 x
                 for x in company[0]
-                if x >= NEGATIVE_UPPER_BOUND and x < NEUTRAL_UPPER_BOUND
+                if x > NEGATIVE_UPPER_BOUND and x <= NEUTRAL_UPPER_BOUND
             ]
         )
 
         # negative tweets
-        company[5] = len([x for x in company[0] if x < NEGATIVE_UPPER_BOUND])
+        company[5] = len([x for x in company[0] if x <= NEGATIVE_UPPER_BOUND])
 
     # load company data
     with open(file_companies, encoding="utf-8") as file_in:
