@@ -37,9 +37,9 @@ def merge_company_status_files(
                 # reply count
                 new_company_info_vectors[company_name][3].append(row[11])
 
-    for company in new_company_info_vectors.values():
-        for i in range(len(company)):
-            company[i] = json.dumps(company[i]).replace(",", " ")
+    # for company in new_company_info_vectors.values():
+    #     for i in range(len(company)):
+    #         company[i] = json.dumps(company[i]).replace(",", " ")
 
     # load company data
     with open(file_companies, encoding="utf-8") as file_in:
@@ -55,7 +55,7 @@ def merge_company_status_files(
             )
 
             for row in tqdm(reader):
-                if not any(row[2]):
+                if not any(new_company_info_vectors.get(row[2])):
                     continue
 
                 writer.writerow(row + new_company_info_vectors.get(row[2]))
