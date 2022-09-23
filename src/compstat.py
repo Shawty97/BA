@@ -1,5 +1,6 @@
 import csv
 import json
+from tqdm import tqdm
 from pathlib import Path
 
 
@@ -28,13 +29,13 @@ def merge_company_status_files(
                 new_company_info_vectors[company_name][0].append(row[-1])
 
                 # retweet count
-                new_company_info_vectors[company_name][0].append(row[8])
+                new_company_info_vectors[company_name][1].append(row[8])
 
                 # like count
-                new_company_info_vectors[company_name][0].append(row[10])
+                new_company_info_vectors[company_name][2].append(row[10])
 
                 # reply count
-                new_company_info_vectors[company_name][0].append(row[11])
+                new_company_info_vectors[company_name][3].append(row[11])
 
     for company in new_company_info_vectors.values():
         for i in range(len(company)):
@@ -53,5 +54,5 @@ def merge_company_status_files(
                 + ["sent_vader_vector", "retweet_counts", "like_counts", "reply_counts"]
             )
 
-            for row in reader:
-                writer.writerow(row + [new_company_info_vectors.get(row[2])])
+            for row in tqdm(reader):
+                writer.writerow(row + new_company_info_vectors.get(row[2]))
