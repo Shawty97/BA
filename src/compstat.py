@@ -41,15 +41,20 @@ def merge_company_status_files(
 
                 # reply count
                 new_company_info_vectors[company_name][3].append(int(row[11]))
-    
-    
+
     # calculate sums
     for company in new_company_info_vectors.values():
         # positive tweets
         company[4] = len([x for x in company[0] if x >= NEUTRAL_UPPER_BOUND])
 
         # neutral tweets
-        company[6] = len([x for x in company[0] if x >= NEGATIVE_UPPER_BOUND and x < NEUTRAL_UPPER_BOUND])
+        company[6] = len(
+            [
+                x
+                for x in company[0]
+                if x >= NEGATIVE_UPPER_BOUND and x < NEUTRAL_UPPER_BOUND
+            ]
+        )
 
         # negative tweets
         company[5] = len([x for x in company[0] if x < NEGATIVE_UPPER_BOUND])
