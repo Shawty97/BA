@@ -44,7 +44,7 @@ def merge_company_status_files(
         reader = csv.reader(file_in, delimiter=",")
         header = next(reader)
 
-        print('Step 2: Write merged data')
+        print('Step 3: Write merged data')
         # write merged data
         with open(out_path, mode="w", encoding="utf-8", newline="") as file_out:
             writer = csv.writer(file_out, delimiter=",")
@@ -54,6 +54,7 @@ def merge_company_status_files(
             )
 
             for row in tqdm(reader):
+                # ignore rows where we couldn't match a company
                 if not any(new_company_info_vectors.get(row[2])):
                     continue
 
