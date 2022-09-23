@@ -14,7 +14,8 @@ def merge_company_status_files(
         reader = csv.reader(file_in, delimiter=",")
         _ = next(reader)
 
-        for row in reader:
+        print('Step 1: Load company data')
+        for row in tqdm(reader):
             new_company_info_vectors[row[2]] = [[], [], [], []]
 
     # load tweets for the companies
@@ -22,7 +23,8 @@ def merge_company_status_files(
         reader = csv.reader(file_in, delimiter=",")
         _ = next(reader)
 
-        for row in reader:
+        print('Step 2: Load tweets')
+        for row in tqdm(reader):
             company_name = row[18]
             if company_name in new_company_info_vectors:
                 # sent vader
@@ -37,15 +39,12 @@ def merge_company_status_files(
                 # reply count
                 new_company_info_vectors[company_name][3].append(row[11])
 
-    # for company in new_company_info_vectors.values():
-    #     for i in range(len(company)):
-    #         company[i] = json.dumps(company[i]).replace(",", " ")
-
     # load company data
     with open(file_companies, encoding="utf-8") as file_in:
         reader = csv.reader(file_in, delimiter=",")
         header = next(reader)
 
+        print('Step 2: Write merged data')
         # write merged data
         with open(out_path, mode="w", encoding="utf-8", newline="") as file_out:
             writer = csv.writer(file_out, delimiter=",")
