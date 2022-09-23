@@ -28,16 +28,16 @@ def merge_company_status_files(
             company_name = row[18]
             if company_name in new_company_info_vectors:
                 # sent vader
-                new_company_info_vectors[company_name][0].append(row[-1])
+                new_company_info_vectors[company_name][0].append(float(row[-1]))
 
                 # retweet count
-                new_company_info_vectors[company_name][1].append(row[8])
+                new_company_info_vectors[company_name][1].append(int(row[8]))
 
                 # like count
-                new_company_info_vectors[company_name][2].append(row[10])
+                new_company_info_vectors[company_name][2].append(int(row[10]))
 
                 # reply count
-                new_company_info_vectors[company_name][3].append(row[11])
+                new_company_info_vectors[company_name][3].append(int(row[11]))
 
     # load company data
     with open(file_companies, encoding="utf-8") as file_in:
