@@ -68,3 +68,6 @@ venv.bak/
 # IDEs
 .idea/
 .vscode/
+
+# data dir
+src/data/*_*.csv
