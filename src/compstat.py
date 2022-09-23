@@ -55,4 +55,7 @@ def merge_company_status_files(
             )
 
             for row in tqdm(reader):
+                if not any(row[2]):
+                    continue
+
                 writer.writerow(row + new_company_info_vectors.get(row[2]))
