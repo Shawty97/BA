@@ -1,15 +1,13 @@
+from pathlib import Path
+
 import numpy
 import pandas
-
-from pathlib import Path
 from sklearn import metrics, svm
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-
-
-USED_SENTI_METHOD = "vader"
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import (GridSearchCV, cross_val_score,
+                                     train_test_split)
 
 
 def _generate_test_splits(l: list[tuple[str, float]]) -> tuple:

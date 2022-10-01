@@ -4,9 +4,9 @@ import re
 import string
 from pathlib import Path
 
-from tqdm import tqdm
-from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
+from nltk.tokenize import sent_tokenize, word_tokenize
+from tqdm import tqdm
 
 # regex
 punctuation_re = re.compile(rf"[{re.escape(string.punctuation)}]")
@@ -77,11 +77,11 @@ def clean_csv(file_path: Path, out_path: Path):
         header = next(reader)
 
         # write cleaned data
-        with open(out_path, mode="w", encoding="utf-8", newline='') as file_out:
+        with open(out_path, mode="w", encoding="utf-8", newline="") as file_out:
             writer = csv.writer(file_out, delimiter=",")
             writer.writerow(header)
             for cleaned_row in _clean_csv(reader):
                 if not cleaned_row[2]:
                     continue
-                
+
                 writer.writerow(cleaned_row)
