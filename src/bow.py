@@ -29,35 +29,35 @@ def bow_csv(file_path: Path) -> dict[str, float]:
     with open(file_path) as file_in:
         df = pandas.read_csv(file_path)
 
-    # get test splits
+    print("get test splits")
     x_train, x_test, y_train, y_test = _generate_test_splits(
         (t for t in zip(df["text"], df["sent_vader"]))
     )
 
-    # vectorize training data
+    print("vectorize training data")
     vectorizer = CountVectorizer(ngram_range=(1, 2), min_df=2)
     x_train = vectorizer.fit_transform(x_train)
     x_test = vectorizer.transform(x_test)
 
-    # Mean cross: validation accuracy
+    print("Mean cross: validation accuracy")
     scores = cross_val_score(LogisticRegression(), x_train, y_train, cv=5)
 
-    # Training set score: LogisticRegression
+    print("Training set score: LogisticRegression")
     logreg = LogisticRegression()
     logreg.fit(x_train, y_train)
     lr_confusion = metrics.confusion_matrix(y_test, logreg.predict(x_test))
 
-    # Training set score: RandomForestClassifier
+    print("Training set score: RandomForestClassifier")
     rfc = RandomForestClassifier()
     rfc.fit(x_train, y_train)
     rf_confusion = metrics.confusion_matrix(y_test, rfc.predict(x_test))
 
-    # Best cross-validation score; Best parameters
+    print("Best cross-validation score; Best parameters")
     param_grid = {"C": [0.001, 0.01, 0.1, 1, 10]}
     grid = GridSearchCV(LogisticRegression(), param_grid, cv=5)
     grid.fit(x_train, y_train)
 
-    # Support vector machine
+    print("Support vector machine")
     rbf = svm.SVC(kernel="rbf", gamma=0.5, C=0.1).fit(x_train, y_train)
     rbf_pred = rbf.predict(x_test)
     rbf_accuracy = metrics.accuracy_score(y_true=y_test, y_pred=rbf_pred)
