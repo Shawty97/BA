@@ -69,5 +69,6 @@ venv.bak/
 .idea/
 .vscode/
 
-# data dir
+# data
 src/data/*_*.csv
+src/data/tweets.csv
