@@ -12,17 +12,6 @@ class CLI:
     Command Line Interface for Robert's Bachelor Thesis
     """
 
-    def all(self):
-        print('Cleaning data directory (only leaving tweets.csv)')
-        for node in _data_dir.iterdir():
-            if node.is_file() and node.name != 'tweets.csv':
-                node.unlink()
-        print('Running all 3 steps consecutively: clean → sent → bow')
-        for i, method in enumerate([self.clean, self.sent, self.bow]):
-            print(f'\nStep {i+1}: \t{method.__name__}')
-            method()
-        print('done')
-
     @staticmethod
     def clean():
         """
@@ -59,19 +48,24 @@ class CLI:
         from bow import bow_csv
 
         summary = bow_csv(file_path=_data_dir / "tweets_analyzed.csv")
-        print(tabulate(list(summary.items()), headers=['Stat', 'Value']))
-    
+        print(tabulate(list(summary.items()), headers=["Stat", "Value"]))
+
     @staticmethod
-    def compstat():
+    def combine_company_status_files():
         """DOCUMENT ME PLS"""
-        
+
         from compstat import merge_company_status_files
 
         merge_company_status_files(
-            file_companies=_data_dir / 'funded_companies.csv',
-            file_analyzed=_data_dir / 'tweets_analyzed.csv',
-            out_path=_data_dir / 'companies_status.csv',
+            file_companies=_data_dir / "funded_companies.csv",
+            file_analyzed=_data_dir / "tweets_analyzed.csv",
+            out_path=_data_dir / "companies_status.csv",
         )
+
+    @classmethod
+    def ccsf(cls):
+        """Shortcut for the `combine_company_status_files` command"""
+        cls.combine_company_status_files()
 
 
 if __name__ == "__main__":
