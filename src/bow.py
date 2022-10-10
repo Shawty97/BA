@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV, cross_val_score, train_test_split
 
-current_step = 1
+current_step = 0
 
 
 def _update_script_step(text: str, pbar: tqdm):
