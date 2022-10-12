@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import datetime
 
 import numpy
 import pandas
@@ -34,8 +35,7 @@ def _generate_test_splits(l: list[tuple[str, float]]) -> tuple:
 
 
 def bow_csv(file_path: Path) -> dict[str, float]:
-    with open(file_path) as file_in:
-        df = pandas.read_csv(file_path)
+    df = pandas.read_csv(file_path)
 
     with tqdm(total=7) as pbar:
         _update_script_step("get test splits", pbar)
@@ -66,10 +66,10 @@ def bow_csv(file_path: Path) -> dict[str, float]:
         grid = GridSearchCV(LogisticRegression(), param_grid, cv=5)
         grid.fit(x_train, y_train)
 
-        _update_script_step("Support vector machine", pbar)
-        rbf = svm.SVC(kernel="rbf", gamma=0.5, C=0.1).fit(x_train, y_train)
-        rbf_pred = rbf.predict(x_test)
-        rbf_accuracy = metrics.accuracy_score(y_true=y_test, y_pred=rbf_pred)
+        # _update_script_step("Support vector machine", pbar)
+        # rbf = svm.SVC(kernel="rbf", gamma=0.5, C=0.1).fit(x_train, y_train)
+        # rbf_pred = rbf.predict(x_test)
+        # rbf_accuracy = metrics.accuracy_score(y_true=y_test, y_pred=rbf_pred)
 
         return dict(
             lr_mean_cross=numpy.mean(scores),
@@ -81,5 +81,5 @@ def bow_csv(file_path: Path) -> dict[str, float]:
             rf_confusion_matrix=str(rf_confusion).replace("\n", ","),
             gs_best_cross_validation_score=grid.best_score_,
             gs_best_params=grid.best_params_,
-            rbf_accuracy=rbf_accuracy,
+            # rbf_accuracy=rbf_accuracy,
         )
