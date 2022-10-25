@@ -26,6 +26,7 @@ def _generate_test_splits(l: list[tuple[str, float]]) -> tuple:
 
 
 def bow_csv(file_path: Path) -> dict[str, float]:
+    print("loading data")
     with open(file_path) as file_in:
         df = pandas.read_csv(file_path)
 
