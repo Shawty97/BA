@@ -21,7 +21,7 @@ class CLI:
         - bla
         - blub
         """
-        from clean import clean_csv
+        from .clean import clean_csv
 
         clean_csv(
             file_path=_data_dir / "tweets.csv",
@@ -33,7 +33,7 @@ class CLI:
         """
         file1 -> sent methoden bla bla -> file2
         """
-        from sent import sentiment_csv
+        from .sent import sentiment_csv
 
         sentiment_csv(
             file_path=_data_dir / "tweets_cleaned.csv",
@@ -45,7 +45,7 @@ class CLI:
         """
         get accuracy score for tweets_analyzed.csv
         """
-        from bow import bow_csv
+        from .bow import bow_csv
 
         summary = bow_csv(file_path=_data_dir / "tweets_analyzed.csv")
         print(tabulate(list(summary.items()), headers=["Stat", "Value"]))
@@ -54,7 +54,7 @@ class CLI:
     def combine_company_status_files():
         """DOCUMENT ME PLS"""
 
-        from compstat import merge_company_status_files
+        from .compstat import merge_company_status_files
 
         merge_company_status_files(
             file_companies=_data_dir / "funded_companies.csv",
@@ -66,6 +66,14 @@ class CLI:
     def ccsf(cls):
         """Shortcut for the `combine_company_status_files` command"""
         cls.combine_company_status_files()
+
+    @classmethod
+    def count(cls, number=10):
+        """DOCUMENT ME PLS"""
+        from .count import count_words
+
+        counter = count_words()
+        print(counter.most_common(number))
 
 
 if __name__ == "__main__":
