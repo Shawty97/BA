@@ -1,5 +1,6 @@
-from pathlib import Path
 import csv
+from pathlib import Path
+from tqdm import tqdm
 
 
 TOP_WORD_NUMBER = 10
@@ -12,7 +13,7 @@ def count_words(file_path: Path) -> dict[str, int]:
         reader = csv.reader(file_in, delimiter=",")
         _ = next(reader)
 
-        for row in reader:
+        for row in tqdm(reader, desc="Counting"):
             words = row[2].split(" ")
             for word in words:
                 if word not in word_counts:
@@ -23,4 +24,4 @@ def count_words(file_path: Path) -> dict[str, int]:
     # select and return top 10
     numbers = [word_counts.values()]
     top10_counts = sorted(range(len(numbers)), key=lambda i: numbers[i], reverse=True)
-    return top10_counts
+    return top10_counts, numbers
