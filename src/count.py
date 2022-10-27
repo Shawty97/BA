@@ -22,7 +22,7 @@ def count_words(file_path: Path) -> dict[str, int]:
                 word_counts[word] += 1
 
     # select and return top TOP_WORD_NUMBER
-    top_counts = sorted(list(word_counts.values()))[:TOP_WORD_NUMBER]
+    top_counts = sorted(list(word_counts.values()), reverse=True)[:TOP_WORD_NUMBER]
     print(top_counts)
     top = dict()
     for word, word_count in word_counts.items():
