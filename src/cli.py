@@ -72,8 +72,11 @@ class CLI:
         """DOCUMENT ME PLS"""
         from count import count_words
 
-        most_comon_words = count_words(file_path=_data_dir / "tweets_cleaned.csv")
+        most_comon_words, unique_word_count = count_words(
+            file_path=_data_dir / "tweets_cleaned.csv"
+        )
         print(most_comon_words)
+        print(f"\nNumber of unique Words: {unique_word_count}")
 
 
 if __name__ == "__main__":
