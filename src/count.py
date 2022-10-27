@@ -22,7 +22,7 @@ def count_words(file_path: Path) -> dict[str, int]:
                 word_counts[word] += 1
 
     # select and return top 10
-    top10_counts = sorted([word_counts.values()])[:10]
+    top10_counts = sorted(list(word_counts.values()))[:10]
     top10 = dict()
     for word, word_count in word_counts.items():
         if word_count not in top10_counts:
