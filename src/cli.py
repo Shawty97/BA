@@ -72,8 +72,8 @@ class CLI:
         """DOCUMENT ME PLS"""
         from count import count_words
 
-        counter = count_words(file_path=_data_dir / "tweets_cleaned.csv")
-        print(counter.most_common(number))
+        most_comon_words = count_words(file_path=_data_dir / "tweets_cleaned.csv")
+        print(most_comon_words)
 
 
 if __name__ == "__main__":
