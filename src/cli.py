@@ -70,7 +70,7 @@ class CLI:
     @classmethod
     def count(cls, number=10):
         """DOCUMENT ME PLS"""
-        from .count import count_words
+        from count import count_words
 
         counter = count_words()
         print(counter.most_common(number))
