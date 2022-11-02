@@ -21,15 +21,17 @@ def _update_script_step(text: str, pbar: tqdm):
     pbar.update(current_step)
 
 
-def _generate_test_splits(l: list[tuple[str, float]]) -> tuple:
+def _generate_test_splits(l: list[tuple[str, float]]) -> tuple[numpy.array]:
     # need tuples like: (['foo', 'bar'], 'pos') or (['foo', 'bar'], 'neg')
-    test_pairs = [(x[0].split(), "pos" if float(x[1]) > 0.5 else "neg") for x in l]
+    test_pairs = numpy.array(
+        [(x[0].split(), "pos" if float(x[1]) > 0.5 else "neg") for x in l]
+    )
 
     train, test = train_test_split(test_pairs, test_size=0.25, random_state=42)
-    x_train = [" ".join(words) for (words, _) in train]
-    x_test = [" ".join(words) for (words, _) in test]
-    y_train = [label for (_, label) in train]
-    y_test = [label for (_, label) in test]
+    x_train = numpy.array([" ".join(words) for (words, _) in train])
+    x_test = numpy.array([" ".join(words) for (words, _) in test])
+    y_train = numpy.array([label for (_, label) in train])
+    y_test = numpy.array([label for (_, label) in test])
 
     return x_train, x_test, y_train, y_test
 
