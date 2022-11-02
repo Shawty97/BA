@@ -36,8 +36,8 @@ def _generate_test_splits(l: list[tuple[str, float]]) -> tuple:
 
 def bow_csv(file_path: Path) -> dict[str, float]:
     print("loading data")
-    with open(file_path) as file_in:
-        df = pandas.read_csv(file_path)
+    with open(file_path, encoding="utf-8") as file_in:
+        df = pandas.read_csv(file_in)
 
     with tqdm(total=7) as pbar:
         _update_script_step("get test splits", pbar)
